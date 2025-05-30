@@ -13,20 +13,14 @@ public class ProductoDTO {
     private String marca;
     @NotBlank(message = "La descripcion debe ser valida")
     private String categoria;
-    @NotNull(message = "El precio unitario es obligatorio")
-    private Double precioUnitario;
-    @NotNull(message = "El stock es obligatorio de ingresar")
-    private Long stock;
 
     public ProductoDTO() {}
 
-    public ProductoDTO(String nombre, String descripcion, String marca, String categoria, Double precioUnitario, Long stock) {
+    public ProductoDTO(String nombre, String descripcion, String marca, String categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.marca = marca;
         this.categoria = categoria;
-        this.precioUnitario = precioUnitario;
-        this.stock = stock;
     }
 
     public String getNombre() {
@@ -59,21 +53,5 @@ public class ProductoDTO {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    public Double getPrecioUnitario() {
-        return precioUnitario;
-    }
-
-    public void setPrecioUnitario(Double precioUnitario) {
-        this.precioUnitario = precioUnitario;
-    }
-
-    public Long getStock() {
-        return stock;
-    }
-
-    public void setStock(Long stock) {
-        this.stock = stock;
     }
 }
