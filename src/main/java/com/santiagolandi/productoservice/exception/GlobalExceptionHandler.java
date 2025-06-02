@@ -23,40 +23,40 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SinProductosException.class)
     public ResponseEntity<ErrorMessage> handleSinProductos(SinProductosException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ErrorMessage("No existen productos para mostrar", ex.getMessage()));
+                .body(new ErrorMessage("Sin datos", ex.getMessage()));
     }
     // Cuando no existe el producto buscado
     @ExceptionHandler(NoExisteProductoBuscadoException.class)
     public ResponseEntity<ErrorMessage> handleNoSeEncuentraProductoConId(NoExisteProductoBuscadoException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ErrorMessage("No existe producto con el id buscado", ex.getMessage()));
+                .body(new ErrorMessage("Sin datos para motrar", ex.getMessage()));
     }
 
     //Cuando quiero ingresar un producto que ya ha sido cargado
     @ExceptionHandler(ProductoYaExisteException.class)
     public ResponseEntity<ErrorMessage> handleProductoYaIngresado(ProductoYaExisteException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorMessage("No se puede ingresar el producto", ex.getMessage()));
+                .body(new ErrorMessage("Error al ingresar producto", ex.getMessage()));
     }
 
     //Cuando quiero buscar un producto por nombre y no existe
     @ExceptionHandler(NoExisteProductoPorNombreException.class)
     public ResponseEntity<ErrorMessage> handleProductoNoExistePorNombre(NoExisteProductoPorNombreException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorMessage("No existe el producto", ex.getMessage()));
+                .body(new ErrorMessage("Sin datos para mostrar", ex.getMessage()));
     }
     // Cuando no existen productos buscados por la categoria ingresada
     @ExceptionHandler(SinProductosPorCategoriaException.class)
     public ResponseEntity<ErrorMessage> handleProductoNoExistePorCategoria(SinProductosPorCategoriaException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorMessage("No existe el producto", ex.getMessage()));
+                .body(new ErrorMessage("Sin datos para mostrar", ex.getMessage()));
     }
 
     // Cuando no existen productos buscados por la marca ingresada
     @ExceptionHandler(SinProductosPorMarcaException.class)
     public ResponseEntity<ErrorMessage> handleProductoNoExistePorMarca(SinProductosPorMarcaException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorMessage("No existe el producto", ex.getMessage()));
+                .body(new ErrorMessage("Sin datos para mostrar", ex.getMessage()));
     }
 }
 record ErrorMessage(String mensaje, String detalle) {}
