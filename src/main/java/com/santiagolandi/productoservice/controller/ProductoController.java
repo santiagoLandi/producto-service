@@ -1,6 +1,7 @@
 package com.santiagolandi.productoservice.controller;
 
 import com.santiagolandi.productoservice.dto.ProductoDTO;
+import com.santiagolandi.productoservice.dto.ProductoStockDTO;
 import com.santiagolandi.productoservice.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,5 +67,11 @@ public class ProductoController {
     public ResponseEntity<?>listarProductosPorCategoria(@PathVariable String categoria) {
         List<ProductoDTO>productos = productoService.buscarProductoPorCategoria(categoria);
         return ResponseEntity.ok(productos);
+    }
+
+    @GetMapping("/stock/{id}")
+    public ResponseEntity<?>mostrarStock(@PathVariable Long id) {
+        ProductoStockDTO producto = productoService.mostrarStock(id);
+        return ResponseEntity.ok(producto);
     }
 }

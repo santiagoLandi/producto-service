@@ -14,14 +14,16 @@ public class Producto {
     private String descripcion;
     private String marca;
     private String categoria;
+    private Integer stock;
 
     public Producto() {}
 
-    public Producto(String nombre, String descripcion, String marca, String categoria) {
+    public Producto(String nombre, String descripcion, String marca, String categoria, Integer stock) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.marca = marca;
         this.categoria = categoria;
+        this.stock = 0;
     }
 
     public Long getId() {
@@ -44,6 +46,10 @@ public class Producto {
         return categoria;
     }
 
+    public Integer getStock() {
+        return stock;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -59,5 +65,11 @@ public class Producto {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+
 
 }

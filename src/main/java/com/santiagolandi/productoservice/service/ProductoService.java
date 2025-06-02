@@ -1,9 +1,11 @@
 package com.santiagolandi.productoservice.service;
 
 import com.santiagolandi.productoservice.dto.ProductoDTO;
+import com.santiagolandi.productoservice.dto.ProductoStockDTO;
 import com.santiagolandi.productoservice.entity.Producto;
 import com.santiagolandi.productoservice.exception.*;
 import com.santiagolandi.productoservice.mapper.ProductoMapper;
+import com.santiagolandi.productoservice.mapper.ProductoStockMapper;
 import com.santiagolandi.productoservice.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +18,13 @@ import java.util.stream.Collectors;
 public class ProductoService {
     private final ProductoRepository productoRepository;
     private final ProductoMapper productoMapper;
+    private final ProductoStockMapper productoStockMapper;
 
     @Autowired
-    public ProductoService(ProductoRepository productoRepository, ProductoMapper productoMapper) {
+    public ProductoService(ProductoRepository productoRepository, ProductoMapper productoMapper, ProductoStockMapper productoStockMapper) {
         this.productoRepository = productoRepository;
         this.productoMapper = productoMapper;
+        this.productoStockMapper = productoStockMapper;
     }
 
     @Transactional
@@ -100,6 +104,11 @@ public class ProductoService {
         return productos.stream().map(productoMapper::toProductoDTO).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public ProductoStockDTO mostrarStock(Long id) {
+        Producto producto = productoRepository.findById(id).orElseThrow(()-> new NoExisteProductoBuscadoException(id));
+        return productoStockMapper.toDTO(producto);
+    }
 
 
 

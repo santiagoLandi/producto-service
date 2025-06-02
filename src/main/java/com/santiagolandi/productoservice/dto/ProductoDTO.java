@@ -13,14 +13,17 @@ public class ProductoDTO {
     private String marca;
     @NotBlank(message = "La descripcion debe ser valida")
     private String categoria;
+    @NotNull(message = "El stock no puede ser negativo")
+    private Integer stock;
 
     public ProductoDTO() {}
 
-    public ProductoDTO(String nombre, String descripcion, String marca, String categoria) {
+    public ProductoDTO(String nombre, String descripcion, String marca, String categoria, Integer stock) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.marca = marca;
         this.categoria = categoria;
+        this.stock = stock;
     }
 
     public String getNombre() {
@@ -53,5 +56,13 @@ public class ProductoDTO {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 }

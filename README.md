@@ -26,6 +26,7 @@ Cada producto cuenta con los siguientes atributos:
 - `descripcion` (String): Descripción del producto
 - `marca` (String): Marca del producto
 - `categoria` (String): Categoría a la que pertenece
+- `stock` (Integer): Cantidad de productos en stock fisico.
 
 ---
 

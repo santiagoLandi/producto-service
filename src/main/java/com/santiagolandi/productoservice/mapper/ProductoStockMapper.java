@@ -1,17 +1,16 @@
 package com.santiagolandi.productoservice.mapper;
 
-import com.santiagolandi.productoservice.dto.ProductoDTO;
+
+import com.santiagolandi.productoservice.dto.ProductoStockDTO;
 import com.santiagolandi.productoservice.entity.Producto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductoMapper {
-    public ProductoDTO toProductoDTO(Producto producto) {
-        return new ProductoDTO(
+public class ProductoStockMapper {
+    public ProductoStockDTO toDTO(Producto producto){
+        return new ProductoStockDTO(
                 producto.getNombre(),
                 producto.getDescripcion(),
-                producto.getMarca(),
-                producto.getCategoria(),
                 producto.getStock()
         );
     }
