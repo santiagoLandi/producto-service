@@ -2,6 +2,7 @@ package com.santiagolandi.productoservice.service;
 
 import com.santiagolandi.productoservice.dto.ProductoDTO;
 import com.santiagolandi.productoservice.dto.ProductoStockDTO;
+import com.santiagolandi.productoservice.dto.SumarStockRequest;
 import com.santiagolandi.productoservice.entity.Producto;
 import com.santiagolandi.productoservice.exception.*;
 import com.santiagolandi.productoservice.mapper.ProductoMapper;
@@ -108,6 +109,15 @@ public class ProductoService {
     public ProductoStockDTO mostrarStock(Long id) {
         Producto producto = productoRepository.findById(id).orElseThrow(()-> new NoExisteProductoBuscadoException(id));
         return productoStockMapper.toDTO(producto);
+    }
+
+    @Transactional
+    public ProductoDTO actualizarStock(Long id, SumarStockRequest cantidad){
+        Producto producto = productoRepository.findById(id).orElseThrow(()-> new NoExisteProductoBuscadoException(id));
+        Integer cantidadComprada = cantidad.getStock();
+        producto.setStock(producto.getStock() + cantidadComprada);
+        productoRepository.save(producto);
+        return productoMapper.toProductoDTO(producto);
     }
 
 

@@ -2,6 +2,7 @@ package com.santiagolandi.productoservice.controller;
 
 import com.santiagolandi.productoservice.dto.ProductoDTO;
 import com.santiagolandi.productoservice.dto.ProductoStockDTO;
+import com.santiagolandi.productoservice.dto.SumarStockRequest;
 import com.santiagolandi.productoservice.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -72,6 +73,12 @@ public class ProductoController {
     @GetMapping("/stock/{id}")
     public ResponseEntity<?>mostrarStock(@PathVariable Long id) {
         ProductoStockDTO producto = productoService.mostrarStock(id);
+        return ResponseEntity.ok(producto);
+    }
+
+    @PutMapping("/stock/{id}")
+    public ResponseEntity<?> actualizarStock(@PathVariable Long id, @RequestBody SumarStockRequest cantidad) {
+        ProductoDTO producto = productoService.actualizarStock(id,cantidad);
         return ResponseEntity.ok(producto);
     }
 }
