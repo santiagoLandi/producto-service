@@ -1,5 +1,6 @@
 package com.santiagolandi.productoservice.controller;
 
+import com.santiagolandi.productoservice.dto.ProductoCreacionDTO;
 import com.santiagolandi.productoservice.dto.ProductoDTO;
 import com.santiagolandi.productoservice.dto.ProductoStockDTO;
 import com.santiagolandi.productoservice.dto.SumarStockRequest;
@@ -23,9 +24,9 @@ public class ProductoController {
     }
 
     @PostMapping("registrar")
-    public ResponseEntity<?>registrarProducto(@RequestBody ProductoDTO productoDTO) {
-        productoService.registrarProducto(productoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productoDTO);
+    public ResponseEntity<?>registrarProducto(@RequestBody ProductoCreacionDTO productoCreacionDTO) {
+        productoService.registrarProducto(productoCreacionDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoCreacionDTO);
     }
 
     @GetMapping("/")

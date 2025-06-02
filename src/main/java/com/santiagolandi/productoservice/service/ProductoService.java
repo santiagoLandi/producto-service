@@ -1,10 +1,12 @@
 package com.santiagolandi.productoservice.service;
 
+import com.santiagolandi.productoservice.dto.ProductoCreacionDTO;
 import com.santiagolandi.productoservice.dto.ProductoDTO;
 import com.santiagolandi.productoservice.dto.ProductoStockDTO;
 import com.santiagolandi.productoservice.dto.SumarStockRequest;
 import com.santiagolandi.productoservice.entity.Producto;
 import com.santiagolandi.productoservice.exception.*;
+import com.santiagolandi.productoservice.mapper.ProductoCreacionMapper;
 import com.santiagolandi.productoservice.mapper.ProductoMapper;
 import com.santiagolandi.productoservice.mapper.ProductoStockMapper;
 import com.santiagolandi.productoservice.repository.ProductoRepository;
@@ -20,24 +22,25 @@ public class ProductoService {
     private final ProductoRepository productoRepository;
     private final ProductoMapper productoMapper;
     private final ProductoStockMapper productoStockMapper;
+    private final ProductoCreacionMapper productoCreacionMapper;
 
     @Autowired
-    public ProductoService(ProductoRepository productoRepository, ProductoMapper productoMapper, ProductoStockMapper productoStockMapper) {
+    public ProductoService(ProductoRepository productoRepository, ProductoMapper productoMapper, ProductoStockMapper productoStockMapper, ProductoCreacionMapper productoCreacionMapper) {
         this.productoRepository = productoRepository;
         this.productoMapper = productoMapper;
         this.productoStockMapper = productoStockMapper;
+        this.productoCreacionMapper = productoCreacionMapper;
     }
 
     @Transactional
-    public ProductoDTO registrarProducto(ProductoDTO productoDTO) {
+    public ProductoCreacionDTO registrarProducto(ProductoCreacionDTO productoDTO) {
         Producto existente = productoRepository.findByNombreAndMarca(productoDTO.getNombre(),productoDTO.getMarca());
         if (existente != null) {
             throw new ProductoYaExisteException(productoDTO.getNombre(),productoDTO.getMarca());
         }
-        Producto producto = new Producto();
-        mapearAdto(productoDTO, producto);
+        Producto producto = productoCreacionMapper.toProducto(productoDTO);
         productoRepository.save(producto);
-        return productoMapper.toProductoDTO(producto);
+        return productoCreacionMapper.toCreacionDTO(producto);
     }
 
     private ProductoDTO mapearAdto(ProductoDTO productoDTO, Producto producto) {
