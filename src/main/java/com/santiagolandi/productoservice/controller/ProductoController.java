@@ -77,9 +77,9 @@ public class ProductoController {
         return ResponseEntity.ok(producto);
     }
 
-    @PutMapping("/stock/{id}")
-    public ResponseEntity<?> actualizarStock(@PathVariable Long id, @RequestBody SumarStockRequest cantidad) {
-        ProductoDTO producto = productoService.actualizarStock(id,cantidad);
+    @PutMapping("/sumar-stock/{id}")
+    public ResponseEntity<?> sumarStock(@PathVariable Long id, @RequestBody SumarStockRequest cantidad) {
+        ProductoDTO producto = productoService.sumarStock(id,cantidad);
         return ResponseEntity.ok(producto);
     }
 }
