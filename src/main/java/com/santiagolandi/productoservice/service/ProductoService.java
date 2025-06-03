@@ -115,12 +115,11 @@ public class ProductoService {
     }
 
     @Transactional
-    public ProductoDTO sumarStock(Long id, SumarStockRequest cantidad){
+    public void sumarStock(Long id, SumarStockRequest cantidad){
         Producto producto = productoRepository.findById(id).orElseThrow(()-> new NoExisteProductoBuscadoException(id));
         Integer cantidadComprada = cantidad.getStock();
         producto.setStock(producto.getStock() + cantidadComprada);
         productoRepository.save(producto);
-        return productoMapper.toProductoDTO(producto);
     }
 
 

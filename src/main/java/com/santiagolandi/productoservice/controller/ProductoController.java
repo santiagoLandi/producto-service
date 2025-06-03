@@ -79,7 +79,7 @@ public class ProductoController {
 
     @PutMapping("/sumar-stock/{id}")
     public ResponseEntity<?> sumarStock(@PathVariable Long id, @RequestBody SumarStockRequest cantidad) {
-        ProductoDTO producto = productoService.sumarStock(id,cantidad);
-        return ResponseEntity.ok(producto);
+        productoService.sumarStock(id,cantidad);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 }
